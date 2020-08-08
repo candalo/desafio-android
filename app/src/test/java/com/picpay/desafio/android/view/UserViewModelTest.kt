@@ -3,6 +3,7 @@ package com.picpay.desafio.android.view
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.Observer
 import com.nhaarman.mockitokotlin2.*
+import com.picpay.desafio.android.CoroutineRule
 import com.picpay.desafio.android.User
 import com.picpay.desafio.android.data.UserRepository
 import org.junit.Assert.assertEquals
@@ -15,6 +16,8 @@ internal class UserViewModelTest {
 
     @get:Rule
     internal val instantExecutorRule = InstantTaskExecutorRule()
+    @get:Rule
+    internal val coroutineRule = CoroutineRule()
     @InjectMocks
     private lateinit var viewModel: UserViewModel
     @Mock
@@ -33,7 +36,6 @@ internal class UserViewModelTest {
     fun `Users should be posted to live data`() {
         val user = User("", "Lucas Candalo", 1, "candalo")
         repository.stub { onBlocking { getAll() }.doReturn(listOf(user)) }
-        viewModel.users.observeForever(observer)
 
         viewModel.fetch().observeForever(observer)
 
