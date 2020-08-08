@@ -1,12 +1,12 @@
 package com.picpay.desafio.android
 
 import android.os.Bundle
-import android.view.View
 import android.widget.ProgressBar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.picpay.desafio.android.model.User
 import com.picpay.desafio.android.view.UserViewModel
 import com.picpay.desafio.android.view.gone
 import com.picpay.desafio.android.view.visible

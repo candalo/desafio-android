@@ -2,17 +2,15 @@ package com.picpay.desafio.android.data
 
 import com.nhaarman.mockitokotlin2.doReturn
 import com.nhaarman.mockitokotlin2.stub
-import com.picpay.desafio.android.User
+import com.picpay.desafio.android.model.User
 import kotlinx.coroutines.runBlocking
 import org.junit.Assert.assertEquals
 import org.junit.Before
 import org.junit.Test
 import org.mockito.InjectMocks
 import org.mockito.Mock
-import org.mockito.Mockito.`when`
 import org.mockito.MockitoAnnotations
 import retrofit2.Call
-import retrofit2.Response
 
 class DefaultUserRepositoryTest {
 

@@ -4,7 +4,7 @@ import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.Observer
 import com.nhaarman.mockitokotlin2.*
 import com.picpay.desafio.android.CoroutineRule
-import com.picpay.desafio.android.User
+import com.picpay.desafio.android.model.User
 import com.picpay.desafio.android.data.UserRepository
 import org.junit.Assert.assertEquals
 import org.junit.Before
@@ -34,7 +34,12 @@ internal class UserViewModelTest {
 
     @Test
     fun `Users should be posted to live data`() {
-        val user = User("", "Lucas Candalo", 1, "candalo")
+        val user = User(
+            "",
+            "Lucas Candalo",
+            1,
+            "candalo"
+        )
         repository.stub { onBlocking { getAll() }.doReturn(listOf(user)) }
 
         viewModel.fetch().observeForever(observer)
