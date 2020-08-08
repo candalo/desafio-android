@@ -9,7 +9,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import com.picpay.desafio.android.data.PicPayService
+import com.picpay.desafio.android.view.UserViewModel
 import okhttp3.OkHttpClient
+import org.koin.android.ext.android.inject
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -17,6 +19,8 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 class MainActivity : AppCompatActivity(R.layout.activity_main) {
+
+    private val viewModel: UserViewModel by inject()
 
     private lateinit var recyclerView: RecyclerView
     private lateinit var progressBar: ProgressBar
