@@ -4,7 +4,9 @@ import com.google.gson.GsonBuilder
 import com.picpay.desafio.android.data.DefaultUserRepository
 import com.picpay.desafio.android.data.PicPayService
 import com.picpay.desafio.android.data.UserRepository
+import com.picpay.desafio.android.view.UserViewModel
 import okhttp3.OkHttpClient
+import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -33,4 +35,8 @@ val networkModule = module {
 
 val dataModule = module {
     single<UserRepository> { DefaultUserRepository(get()) }
+}
+
+val viewModule = module {
+    viewModel { UserViewModel(get()) }
 }

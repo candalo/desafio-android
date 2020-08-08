@@ -2,6 +2,7 @@ package com.picpay.desafio.android
 
 import com.picpay.desafio.android.data.PicPayService
 import com.picpay.desafio.android.data.UserRepository
+import com.picpay.desafio.android.view.UserViewModel
 import junit.framework.TestCase.assertTrue
 import okhttp3.OkHttpClient
 import org.junit.Assert.assertEquals
@@ -19,12 +20,13 @@ internal class DITest : KoinTest {
     private val retrofit: Retrofit by inject()
     private val service: PicPayService by inject()
     private val repository: UserRepository by inject()
+    private val viewModel: UserViewModel by inject()
 
     companion object {
         @BeforeClass
         @JvmStatic
         fun setup() {
-            startKoin { modules(listOf(networkModule, dataModule)) }
+            startKoin { modules(listOf(networkModule, dataModule, viewModule)) }
         }
     }
 
@@ -51,6 +53,11 @@ internal class DITest : KoinTest {
     @Test
     fun `User repository instance should be created`() {
         assertNotNull(repository)
+    }
+
+    @Test
+    fun `User view model instance should be created`() {
+        assertNotNull(viewModel)
     }
 
 }
