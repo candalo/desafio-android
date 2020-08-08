@@ -20,15 +20,18 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        observeUsers()
+        fetchUsers()
     }
 
-    private fun observeUsers() {
+    private fun fetchUsers() {
         Observer<List<User>> { users ->
             progressBar.visibility = View.GONE
             adapter.users = users
         }.apply {
-            userViewModel.users.observe(this@MainActivity, this)
+            with(userViewModel) {
+                users.observe(this@MainActivity, this@apply)
+                fetch()
+            }
         }
     }
 
