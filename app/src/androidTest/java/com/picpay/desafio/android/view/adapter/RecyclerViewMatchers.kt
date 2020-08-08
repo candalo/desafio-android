@@ -11,7 +11,7 @@ import org.hamcrest.Matcher
 
 object RecyclerViewMatchers {
 
-    fun atPosition(
+    private fun atPosition(
         position: Int,
         itemMatcher: Matcher<View>
     ) = object : BoundedMatcher<View, RecyclerView>(RecyclerView::class.java) {
@@ -26,7 +26,7 @@ object RecyclerViewMatchers {
         }
     }
 
-    fun checkRecyclerViewItem(resId: Int, position: Int, withMatcher: Matcher<View>) {
+    internal fun checkRecyclerViewItem(resId: Int, position: Int, withMatcher: Matcher<View>) {
         Espresso.onView(ViewMatchers.withId(resId)).check(
             ViewAssertions.matches(
                 atPosition(
@@ -36,4 +36,5 @@ object RecyclerViewMatchers {
             )
         )
     }
+
 }
