@@ -1,4 +1,4 @@
-package com.picpay.desafio.android
+package com.picpay.desafio.android.view
 
 import android.os.Bundle
 import android.widget.ProgressBar
@@ -6,10 +6,9 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.picpay.desafio.android.R
+import com.picpay.desafio.android.UserListAdapter
 import com.picpay.desafio.android.model.User
-import com.picpay.desafio.android.view.UserViewModel
-import com.picpay.desafio.android.view.gone
-import com.picpay.desafio.android.view.visible
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MainActivity : AppCompatActivity(R.layout.activity_main) {
