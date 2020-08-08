@@ -30,8 +30,7 @@ class DefaultUserRepositoryTest {
 
     @Test
     fun `Users count should be returned correctly`() {
-        `when`(call.execute()).thenReturn(Response.success(getUsers()))
-        service.stub { onBlocking { getUsers() }.doReturn(call) }
+        service.stub { onBlocking { getUsers() }.doReturn(getUsers()) }
 
         val users = runBlocking { repository.getAll() }
 

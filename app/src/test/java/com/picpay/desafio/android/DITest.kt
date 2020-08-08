@@ -4,6 +4,7 @@ import com.picpay.desafio.android.data.PicPayService
 import com.picpay.desafio.android.data.UserRepository
 import com.picpay.desafio.android.view.UserViewModel
 import junit.framework.TestCase.assertTrue
+import kotlinx.coroutines.runBlocking
 import okhttp3.OkHttpClient
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertNotNull
@@ -47,7 +48,7 @@ internal class DITest : KoinTest {
 
     @Test
     fun `PicPayService instance should be created`() {
-        assertNotNull(service.getUsers())
+        assertNotNull(runBlocking { service.getUsers() })
     }
 
     @Test

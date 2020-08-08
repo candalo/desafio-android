@@ -4,6 +4,6 @@ import com.picpay.desafio.android.User
 
 interface UserRepository {
 
-    fun getAll(): List<User>
+    suspend fun getAll(): List<User>
 
 }
