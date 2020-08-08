@@ -1,6 +1,7 @@
 package com.picpay.desafio.android
 
 import com.picpay.desafio.android.data.PicPayService
+import com.picpay.desafio.android.data.UserRepository
 import junit.framework.TestCase.assertTrue
 import okhttp3.OkHttpClient
 import org.junit.Assert.assertEquals
@@ -17,12 +18,13 @@ internal class DITest : KoinTest {
 
     private val retrofit: Retrofit by inject()
     private val service: PicPayService by inject()
+    private val repository: UserRepository by inject()
 
     companion object {
         @BeforeClass
         @JvmStatic
         fun setup() {
-            startKoin { modules(networkModule) }
+            startKoin { modules(listOf(networkModule, dataModule)) }
         }
     }
 
@@ -44,6 +46,11 @@ internal class DITest : KoinTest {
     @Test
     fun `PicPayService instance should be created`() {
         assertNotNull(service.getUsers())
+    }
+
+    @Test
+    fun `User repository instance should be created`() {
+        assertNotNull(repository)
     }
 
 }

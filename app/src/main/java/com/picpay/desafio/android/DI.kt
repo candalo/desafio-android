@@ -1,7 +1,9 @@
 package com.picpay.desafio.android
 
 import com.google.gson.GsonBuilder
+import com.picpay.desafio.android.data.DefaultUserRepository
 import com.picpay.desafio.android.data.PicPayService
+import com.picpay.desafio.android.data.UserRepository
 import okhttp3.OkHttpClient
 import org.koin.dsl.module
 import retrofit2.Retrofit
@@ -27,4 +29,8 @@ val networkModule = module {
     single {
         get<Retrofit>().create(PicPayService::class.java)
     }
+}
+
+val dataModule = module {
+    single<UserRepository> { DefaultUserRepository(get()) }
 }
