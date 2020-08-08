@@ -11,7 +11,7 @@ import com.picpay.desafio.android.view.adapter.UserListAdapter
 import com.picpay.desafio.android.model.User
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class MainActivity : AppCompatActivity(R.layout.activity_main) {
+class UsersActivity : AppCompatActivity(R.layout.activity_users) {
 
     private val userViewModel: UserViewModel by viewModel()
     private val recyclerView: RecyclerView by lazy { findViewById<RecyclerView>(R.id.recyclerView) }
@@ -30,14 +30,14 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
             adapter.users = users
         }.apply {
             progressBar.visible()
-            userViewModel.fetch().observe(this@MainActivity, this@apply)
+            userViewModel.fetch().observe(this@UsersActivity, this@apply)
         }
     }
 
     private fun configureRecyclerView() {
         with(recyclerView) {
-            adapter = this@MainActivity.adapter
-            layoutManager = LinearLayoutManager(this@MainActivity)
+            adapter = this@UsersActivity.adapter
+            layoutManager = LinearLayoutManager(this@UsersActivity)
         }
     }
 

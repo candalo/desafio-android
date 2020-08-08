@@ -18,7 +18,7 @@ import org.junit.Test
 import org.koin.core.context.loadKoinModules
 
 
-class MainActivityTest {
+class UsersActivityTest {
 
     private val server = MockWebServer()
     private val context = InstrumentationRegistry.getInstrumentation().targetContext
@@ -31,7 +31,7 @@ class MainActivityTest {
 
     @Test
     fun shouldDisplayTitle() {
-        launchActivity<MainActivity>().apply {
+        launchActivity<UsersActivity>().apply {
             val expectedTitle = context.getString(R.string.title)
 
             moveToState(Lifecycle.State.RESUMED)
@@ -51,7 +51,7 @@ class MainActivityTest {
             }
         }
 
-        launchActivity<MainActivity>().apply {
+        launchActivity<UsersActivity>().apply {
             RecyclerViewMatchers.checkRecyclerViewItem(R.id.recyclerView, 0, withText("Eduardo Santos"))
             RecyclerViewMatchers.checkRecyclerViewItem(R.id.recyclerView, 0, withText("@eduardo.santos"))
         }
