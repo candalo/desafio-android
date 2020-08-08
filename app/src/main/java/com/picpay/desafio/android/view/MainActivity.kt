@@ -7,7 +7,7 @@ import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.picpay.desafio.android.R
-import com.picpay.desafio.android.UserListAdapter
+import com.picpay.desafio.android.view.adapter.UserListAdapter
 import com.picpay.desafio.android.model.User
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
