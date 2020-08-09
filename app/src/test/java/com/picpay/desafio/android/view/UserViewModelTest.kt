@@ -8,13 +8,13 @@ import com.picpay.desafio.android.CoroutineRule
 import com.picpay.desafio.android.model.User
 import com.picpay.desafio.android.data.UserRepository
 import com.picpay.desafio.android.model.ResponseState
-import org.junit.After
 import org.junit.Assert.assertEquals
-import org.junit.Assert.assertTrue
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.mockito.*
+import java.util.concurrent.CountDownLatch
+import java.util.concurrent.TimeUnit
 
 internal class UserViewModelTest {
 
@@ -26,10 +26,6 @@ internal class UserViewModelTest {
     private lateinit var viewModel: UserViewModel
     @Mock
     private lateinit var repository: UserRepository
-    @Mock
-    private lateinit var observer: Observer<ResponseState<List<User>>>
-    @Captor
-    private lateinit var captor: ArgumentCaptor<ResponseState<List<User>>>
 
     @Before
     fun setup() {
@@ -46,10 +42,21 @@ internal class UserViewModelTest {
         )
         repository.stub { onBlocking { getAll() }.doReturn(ResponseState.Success(listOf(user))) }
 
-        viewModel.fetch().observeForever(observer)
+        val result = viewModel.fetch().blockingObserve()
 
-        verify(observer, times(1)).onChanged(capture(captor))
-        assertEquals(user.username, (captor.value as ResponseState.Success).body[0].username)
+        assertEquals(user.username, (result as ResponseState.Success).body[0].username)
+    }
+
+    private fun <T> LiveData<T>.blockingObserve(): T? {
+        var value: T? = null
+        val latch = CountDownLatch(1)
+        val innerObserver = Observer<T> {
+            value = it
+            latch.countDown()
+        }
+        observeForever(innerObserver)
+        latch.await(2, TimeUnit.SECONDS)
+        return value
     }
 
 }
