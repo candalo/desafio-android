@@ -1,6 +1,7 @@
 package com.picpay.desafio.android.view
 
 import com.picpay.desafio.android.data.PicPayService
+import com.picpay.desafio.android.data.network.ResponseCallAdapterFactory
 import okhttp3.OkHttpClient
 import org.koin.dsl.module
 import retrofit2.Retrofit
@@ -11,6 +12,7 @@ fun networkModule(baseUrl: String) = module {
         Retrofit.Builder()
             .baseUrl(baseUrl)
             .client(get<OkHttpClient>())
+            .addCallAdapterFactory(get<ResponseCallAdapterFactory>())
             .addConverterFactory(GsonConverterFactory.create(get()))
             .build()
     }

@@ -2,6 +2,7 @@ package com.picpay.desafio.android.data
 
 import com.nhaarman.mockitokotlin2.doReturn
 import com.nhaarman.mockitokotlin2.stub
+import com.picpay.desafio.android.model.ResponseState
 import com.picpay.desafio.android.model.User
 import kotlinx.coroutines.runBlocking
 import org.junit.Assert.assertEquals
@@ -10,7 +11,6 @@ import org.junit.Test
 import org.mockito.InjectMocks
 import org.mockito.Mock
 import org.mockito.MockitoAnnotations
-import retrofit2.Call
 
 class DefaultUserRepositoryTest {
 
@@ -18,8 +18,6 @@ class DefaultUserRepositoryTest {
     private lateinit var repository: DefaultUserRepository
     @Mock
     private lateinit var service: PicPayService
-    @Mock
-    private lateinit var call: Call<List<User>>
 
     @Before
     fun setup() {
@@ -28,11 +26,11 @@ class DefaultUserRepositoryTest {
 
     @Test
     fun `Users count should be returned correctly`() {
-        service.stub { onBlocking { getUsers() }.doReturn(getUsers()) }
+        service.stub { onBlocking { getUsers() }.doReturn(ResponseState.Success(getUsers())) }
 
-        val users = runBlocking { repository.getAll() }
+        val response = runBlocking { repository.getAll() }
 
-        assertEquals(3, users.size)
+        assertEquals(3, (response as ResponseState.Success).body.size)
     }
 
     private fun getUsers() = listOf(

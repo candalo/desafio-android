@@ -4,6 +4,7 @@ import android.content.Context
 import com.picpay.desafio.android.data.PicPayService
 import com.picpay.desafio.android.data.UserRepository
 import com.picpay.desafio.android.data.cache.CacheInterceptor
+import com.picpay.desafio.android.data.network.ResponseCallAdapterFactory
 import com.picpay.desafio.android.view.UserViewModel
 import junit.framework.TestCase.assertTrue
 import kotlinx.coroutines.runBlocking
@@ -77,8 +78,13 @@ internal class DITest : KoinTest {
     }
 
     @Test
+    fun `Retrofit instance should be created with call adapter factory`() {
+        assertTrue(retrofit.callAdapterFactories().any { it is ResponseCallAdapterFactory })
+    }
+
+    @Test
     fun `PicPayService instance should be created`() {
-        assertNotNull(runBlocking { service.getUsers() })
+        assertNotNull(service)
     }
 
     @Test

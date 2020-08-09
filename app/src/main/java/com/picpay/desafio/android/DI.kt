@@ -5,6 +5,7 @@ import com.picpay.desafio.android.data.DefaultUserRepository
 import com.picpay.desafio.android.data.PicPayService
 import com.picpay.desafio.android.data.UserRepository
 import com.picpay.desafio.android.data.cache.CacheInterceptor
+import com.picpay.desafio.android.data.network.ResponseCallAdapterFactory
 import com.picpay.desafio.android.view.UserViewModel
 import okhttp3.Cache
 import okhttp3.OkHttpClient
@@ -33,9 +34,13 @@ val networkModule = module {
         GsonBuilder().create()
     }
     single {
+        ResponseCallAdapterFactory()
+    }
+    single {
         Retrofit.Builder()
             .baseUrl(BASE_URL)
             .client(get())
+            .addCallAdapterFactory(get<ResponseCallAdapterFactory>())
             .addConverterFactory(GsonConverterFactory.create(get()))
             .build()
     }
